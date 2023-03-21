@@ -24,10 +24,10 @@ function OrganizationDash(props) {
     console.log(username)
   }
 
-  const handleUserId=(e)=>{
-    setUserId(e.target.value)
-    console.log(userid)
-  }
+  // const handleUserId=(e)=>{
+  //   setUserId(e.target.value)
+  //   console.log(userid)
+  // }
   async function storeFiles() {
     let file = buffer;
     let blob = new Blob([file], { type: "image/png" });
@@ -39,7 +39,7 @@ function OrganizationDash(props) {
     console.log(cid);
     cid = cid + ".ipfs.w3s.link/image.png";
     console.log(cid);
-    await addCert(userid,cid);
+    await addCert(username,cid);
   }
   const handleContracts= async ()=>{
     const web3 = window.web3;
@@ -56,9 +56,26 @@ function OrganizationDash(props) {
     // this.setState({ account: accounts[0] });
     setAccount(accounts[0]);
   }
+
+
+  async function handleExperience(e){
+    e.preventDefault();
+    const username=e.target.username.value;
+    const experience=e.target.experience.value;
+    await addExp(username, experience);
+  }
+  async function addExp(a,b) {
+    console.log(a,b)
+    console.log("Experience ",userContract)
+    await userContract.methods.addExperience(a,b).send({from:account}).on('transactionHash', (hash) => {
+      console.log(hash)
+    })
+  }
+
+
   async function addCert(a,b) {
-    a=parseInt(a)
-    a=a-1
+    // a=parseInt(a)
+    // a=a-1
     console.log(a,b)
     console.log("certificatesinside",userContract)
     await userContract.methods.addCertificate(a,b).send({from:account}).on('transactionHash', (hash) => {
@@ -150,9 +167,9 @@ function OrganizationDash(props) {
     for(let i=0;i<Count;i++){
       const post=await userContract.methods.getUser(i).call()
       console.log(post)
-      if(post[1]==name&&post[2]==id){
+      if(post[1]==name){
         console.log("succesful login")
-        await addCert(i,'p')
+        // await addCert(i,'p')
       }
     }
         
@@ -175,9 +192,9 @@ function OrganizationDash(props) {
               </label>
               <br/>
               <br/>
-              <label for="userid">userid
+              {/* <label for="userid">userid
                   <textarea name="userid" className="form-control w-100" id="id" rows="2" onChange={handleUserId}/>
-              </label>
+              </label> */}
               <br/>
               <label for="post">
                     <input type="file" name="image" accept=".png, .jpg, .jpeg" onChange={e=>captureFile(e)}/>
@@ -188,6 +205,18 @@ function OrganizationDash(props) {
           {/* {buffer && <div>{buffer.byteength}</div>} */}
       </form>
       <button onClick={storeFiles}  className="btn btn-primary mb-2">addCertificate</button>
+
+      <form onSubmit={handleExperience}>
+        <label for="username">Username</label>
+        <input type="text" name="username"/>
+        
+        <label for ="experience">Experience</label>
+        <input type="text" id="experience" name="exper"/>
+
+      <button type="submit" className="btn btn-primary mb-2">add experience</button>
+
+        
+      </form>
       </div>
     </>
   );

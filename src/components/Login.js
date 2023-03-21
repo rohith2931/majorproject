@@ -173,13 +173,13 @@ function Login(props){
               </label>
               <br/>
               <br/>
-              <label for="userid">userid
+              <label for="userid">Password
                   <textarea name="userid" className="form-control w-100" id="id" rows="2" onChange={handleUserId}/>
               </label>
               <br/>
               <br/>
           </div>
-          <button type="submit"  className="btn btn-primary mb-2">add Post</button>
+          <button type="submit"  className="btn btn-primary mb-2">Log in</button>
       </form>}
 
 
@@ -192,7 +192,7 @@ function Login(props){
               </label>
               <br/>
               <br/>
-              <label for="userid">userid
+              <label for="userid">Password
                   <textarea name="userid" className="form-control w-100" id="id" rows="2" onChange={handleUserId}/>
               </label>
               <br/>

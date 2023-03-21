@@ -12,28 +12,29 @@ contract organizations{
     struct organization{
         address poster;
         uint256 id;
-        string name;
-        string organization_id;
+        string organization_name;
+        string password;
     }
     mapping(uint256 => organization) Organizations;
     event organizationCreated (
         address poster,
         uint256 id,
-        string name,
-        string organization_id
+        string organization_name,
+        string password
     );
 
     function getOrganization(uint256 id) public view returns (address, string memory, string memory){
         require(id < counter, "No such organization");
 
         organization storage o = Organizations[id];
-        return (o.poster,o.name,o.organization_id);
+        return (o.poster,o.organization_name,o.password);
     }
-    function loginOrganization(string memory uname,string memory uid) public payable {
+
+    function loginOrganization(string memory uname,string memory _password) public payable {
             require(msg.value == (0 ether), "Please submit 0 matic");
             organization storage newOraganization = Organizations[counter];
-            newOraganization.name = uname;
-            newOraganization.organization_id = uid;
+            newOraganization.organization_name = uname;
+            newOraganization.password = _password;
             newOraganization.poster = msg.sender;
             newOraganization.id = counter;
             // newPost.comments=new Comment[](100);
@@ -41,7 +42,7 @@ contract organizations{
                 msg.sender, 
                 counter, 
                 uname, 
-                uid
+                _password
             );
             counter++;
 

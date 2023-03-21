@@ -6,7 +6,7 @@ function UserDash(props) {
   let posts=[];
   for (let i = 0; i < post[3].length; i++) {
     posts.push(
-      <div className="card mt-5 w-100 shadow-lg">
+      <div className="card mt-5 w-100 shadow-lg" key={i}>
         <div className="card-body">
           {post[3][i].indexOf(".ipfs.w3s.link/image.png") != -1 && (
             <div class="embed-responsive embed-responsive-21by9">
@@ -20,12 +20,34 @@ function UserDash(props) {
       </div>
     );
   }
+
+  let employee_status =false; // false indicate unemployed
+
+  if (post[5].length>0){
+      let sts =post[5][post[5].length-1].split(' ')[0].toLowerCase()
+
+      if(sts =="end"){
+        employee_status = false;
+      }
+      else{
+        employee_status = true;
+      }
+  }
+
   return (
     <>
       <div>User Dashbord</div>
       <div>
         welcome {username},your user id is {userid}
       </div>
+
+      <h3>Working Status:</h3>
+      {employee_status && <stron>Working</stron>}
+      {!employee_status && <stron>Unemployed</stron>}
+
+      <div>Your Experience:</div>
+      <ul reversed>{post[5].slice().reverse().map(exp=><strong><li>{exp}</li></strong>)}</ul>
+
       <div>your available certificates are:</div>
 
       {

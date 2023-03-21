@@ -153,10 +153,10 @@ function SignUp(props) {
   return (
     <>
       <div>Sign Up</div>
-      <button onClick={handleContracts}>load contract</button>
+      <button onClick={handleContracts} class="btn btn-primary">load contract</button>
       <form onSubmit={(e) => handleFormSubmit(e)}>
         <label>Enter Username :</label>
-        <input type={"text"} name="username" />
+        <input type={"text"} class="form-control" name="username"/>
         <label>Enter User id :</label>
         <input type={"text"} name="userid" />
         <label>Enter Role:</label>
@@ -169,6 +169,7 @@ function SignUp(props) {
         <button type="submit">Submit</button>
       </form>
     </>
+    
   );
 }
 
