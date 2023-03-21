@@ -29,7 +29,10 @@ function UserDash(props) {
       <div>your available certificates are:</div>
 
       {
-        posts.map(post => post)
+        (posts.length>0) && posts.map(post => post)
+      }
+      {
+        posts.length==0 &&<strong>No certificates are uploaded till now...</strong>
       }
 
     </>
