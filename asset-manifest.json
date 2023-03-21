@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/majorproject/static/css/main.ababef68.css",
+    "main.js": "/majorproject/static/js/main.f2bcab49.js",
+    "index.html": "/majorproject/index.html",
+    "main.ababef68.css.map": "/majorproject/static/css/main.ababef68.css.map",
+    "main.f2bcab49.js.map": "/majorproject/static/js/main.f2bcab49.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ababef68.css",
+    "static/js/main.f2bcab49.js"
+  ]
+}
