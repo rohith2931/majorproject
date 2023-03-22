@@ -3,21 +3,40 @@ import { useEffect, useState } from "react";
 import { Web3Storage } from "web3.storage/dist/bundle.esm.min.js";
 import { userabi } from "../config";
 import { useradrs } from "../config";
-import { orgabi } from "../config";
-import { orgadrs } from "../config";
-
+import { comabi } from "../config";
+import { comadrs } from "../config";
+import { instabi } from "../config";
+import { instadrs } from "../config";
+import { useNavigate } from "react-router-dom";
+import UserDash from "./UserDash.js";
 function OrganizationDash(props) {
   const [buffer, setBuffer] = useState();
   const [account, setAccount] = useState("");
   const [userContract, setUserContract] = useState();
-  const [orgContract, setOrgContract] = useState("");
+  const [comContract, setComContract] = useState("");
   const [userCount,setUserCount]=useState('');
-  const [orgCount,setOrgCount]=useState('');
+  const [orgCount,setComCount]=useState('');
   const [username,setUsername]=useState('');
   const [userid,setUserId]=useState('');
+  const [instituteContract, setInstituteContract] = useState("");
+  const [companyContract, setCompanyContract] = useState("");
 
+  const [upost,setUPost] = useState({});
+  const {isCompany,isInstitute} = props;
+  const navigate=useNavigate();
   useEffect(() => {
+    var paths= window.location.href.split('/')
+    if(paths[paths.length-1]==="instituteDash" && localStorage.getItem('isInstituteLogin')=="false"){
+      navigate('/instituteLogin')
+    }
+    if(paths[paths.length-1]==="companyDash" && localStorage.getItem('isCompanyLogin')=="false"){
+      navigate('/companyLogin')
+    }    
+    // if(localStorage.getItem("isCompanyLogin")==="false"){
+    //   navigate('/companyLogin');
+    // }
     loadWeb3();
+
   }, []);
   const handleUsername=(e)=>{
     setUsername(e.target.value)
@@ -48,9 +67,9 @@ function OrganizationDash(props) {
     // userContract=usContract;
     setUserContract(usContract);
     console.log(userContract)
-    const orContract = await new web3.eth.Contract(orgabi, orgadrs);
-    setOrgContract(orContract);
-    console.log(orgContract);
+    const orContract = await new web3.eth.Contract(comabi, comadrs);
+    setComContract(orContract);
+    console.log(comContract);
     const accounts = await web3.eth.getAccounts();
     console.log(accounts)
     // this.setState({ account: accounts[0] });
@@ -97,47 +116,53 @@ function OrganizationDash(props) {
   }
   async function storeContracts(usContract, orContract) {
     setUserContract(usContract);
-    setOrgContract(orContract);
+    setComContract(orContract);
   }
   async function loadBlockchainData() {
     const web3 = window.web3;
     const accounts = await web3.eth.getAccounts();
-    console.log(accounts);
+    console.log(accounts)
     // this.setState({ account: accounts[0] });
     setAccount(accounts[0]);
     const networkId = await web3.eth.net.getId();
-    console.log(networkId);
+    console.log(networkId)
     if (networkId === 11155111) {
       const usContract = await new web3.eth.Contract(userabi, useradrs);
       console.log(usContract);
-      console.log(account, networkId);
+      console.log(account,networkId)
       // userContract=usContract;
       setUserContract(usContract);
-      console.log(userContract);
-      const orContract = await new web3.eth.Contract(orgabi, orgadrs);
-      setOrgContract(orContract);
+      console.log(userContract)
+      
+      
+      const instContract = await new web3.eth.Contract(instabi, instadrs);
+      setInstituteContract(instContract);
+      console.log(instContract);
+      
+      const comContract = await new web3.eth.Contract(comabi, comadrs);
+      setCompanyContract(comContract);
+      console.log(comContract);
       // this.setState({ userContract: userContract });
-      await storeContracts(usContract, orContract);
-      console.log("blabla");
-      console.log(usContract, orContract);
-      console.log("haha");
-      console.log(userContract, orgContract);
-      console.log("Gg");
+      // await storeContracts(usContract,orContract)
+      console.log("blabla")
+      // console.log(usContract,orContract);
+      console.log("haha")
+      // console.log(userContract,orgContract);
+      console.log("Gg")
       // this.setState({ orgContract: orgContract });
-
-      const userCount = await usContract.methods.getCount().call();
-      const orgCount = await orContract.methods.getCount().call();
+      
+      const userCount = await userContract.methods.getCount().call();
+      // const orgCount = await orgContract.methods.getCount().call();
       // this.setState({ userCount });
       setUserCount(userCount);
       // this.setState({ orgCount });
-      setOrgCount(orgCount);
+      // setOrgCount(orgCount);
       console.log(userCount, orgCount);
-      console.log(usContract.methods);
-      console.log(orContract.methods);
+      console.log(userContract.methods);
+      // console.log(orgContract.methods);
       console.log(account);
       setUserContract(usContract);
-      console.log(userContract);
-      await storeContracts();
+      console.log(userContract);  
     } else {
       window.alert("Decentragram contract not deployed to detected network.");
     }
@@ -180,6 +205,23 @@ function OrganizationDash(props) {
     await checkUser(username,userid)
   }
 
+
+  const handleSearch=async(e)=>{
+    e.preventDefault();
+    console.log(userContract)
+    console.log(e.target.username.value)
+    const Count=await userContract.methods.getCount().call()
+    for(let i=0;i<Count;i++){
+      const post=await userContract.methods.getUser(i).call()
+      console.log(post)
+      if(post[1]==e.target.username.value){
+        console.log("succesful login")
+        setUPost(post);
+        console.log(upost)
+        // navigate("/userDash",{state:{username:username,userid:userid,post:post}})
+      }
+    }   
+  }
   return (
     <>
       <div>Organization Dashboard</div>
@@ -206,7 +248,8 @@ function OrganizationDash(props) {
       </form>
       <button onClick={storeFiles}  className="btn btn-primary mb-2">addCertificate</button>
 
-      <form onSubmit={handleExperience}>
+      {isCompany &&
+        <form onSubmit={handleExperience}>
         <label for="username">Username</label>
         <input type="text" name="username"/>
         
@@ -216,8 +259,17 @@ function OrganizationDash(props) {
       <button type="submit" className="btn btn-primary mb-2">add experience</button>
 
         
+      </form>}
+
+
+      <form onSubmit={(e)=>handleSearch(e)}>
+        <label for="username">Username</label>
+        <input type="text" name="username"/>
+        <button type="submit" className="btn btn-primary mb-2">Search</button>
       </form>
+      
       </div>
+      {Object.keys(upost).length !== 0 && <UserDash state={{post:upost}}/>}
     </>
   );
 }

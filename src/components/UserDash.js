@@ -1,8 +1,26 @@
-import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 function UserDash(props) {
+  const navigate=useNavigate();
+  // const history = useHistory();
+  useEffect(()=>{
+    if(localStorage.getItem("isUserLogin")==="false"){
+      // history.push('/home');
+      navigate('/home')
+    }
+  },[])
+
+  // if(localStorage.getItem("isUserLogin")==="false"){
+  //   navigate('/userLogin')
+  // }
   const { state } = useLocation();
-  const { username, userid, post } = state;
+  const { post } = state||props.state;
+  const username=post[1] 
   console.log(post);
+  
+
+
   let posts=[];
   for (let i = 0; i < post[3].length; i++) {
     posts.push(
@@ -36,17 +54,17 @@ function UserDash(props) {
 
   return (
     <>
-      <div>User Dashbord</div>
+      <div>User Dashboard</div>
       <div>
-        welcome {username},your user id is {userid}
+        welcome {username}
       </div>
 
       <h3>Working Status:</h3>
-      {employee_status && <stron>Working</stron>}
-      {!employee_status && <stron>Unemployed</stron>}
+      {employee_status && <strong>Working</strong>}
+      {!employee_status && <strong>Unemployed</strong>}
 
       <div>Your Experience:</div>
-      <ul reversed>{post[5].slice().reverse().map(exp=><strong><li>{exp}</li></strong>)}</ul>
+      <ul reversed>{post[5].slice().reverse().map((exp,index)=><strong key={index}><li>{exp}</li></strong>)}</ul>
 
       <div>your available certificates are:</div>
 

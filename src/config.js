@@ -166,8 +166,9 @@ export const userabi = [
 		"type": "function"
 	}
 ]
-export const orgadrs = "0x6348A45C8eF55840107e55e79A43121b750d6863";
-export const orgabi = [
+
+export const instadrs = "0xC9c4db239B37948Ec627F5cf7E3ed7d15E83174E";
+export const instabi = [
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",
@@ -191,7 +192,7 @@ export const orgabi = [
 			{
 				"indexed": false,
 				"internalType": "string",
-				"name": "organization_name",
+				"name": "institute_name",
 				"type": "string"
 			},
 			{
@@ -201,8 +202,26 @@ export const orgabi = [
 				"type": "string"
 			}
 		],
-		"name": "organizationCreated",
+		"name": "instituteCreated",
 		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "uname",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_password",
+				"type": "string"
+			}
+		],
+		"name": "loginInstitute",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
 	},
 	{
 		"inputs": [],
@@ -225,7 +244,7 @@ export const orgabi = [
 				"type": "uint256"
 			}
 		],
-		"name": "getOrganization",
+		"name": "getInstitute",
 		"outputs": [
 			{
 				"internalType": "address",
@@ -247,6 +266,59 @@ export const orgabi = [
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "owner",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
+
+export const comadrs = "0xc7Ef02649A1a4D5B385Cd40eFb36528b131E3374";
+export const comabi = [
+	{
+		"inputs": [],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "poster",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "company_name",
+				"type": "string"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "password",
+				"type": "string"
+			}
+		],
+		"name": "companyCreated",
+		"type": "event"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "string",
@@ -259,9 +331,51 @@ export const orgabi = [
 				"type": "string"
 			}
 		],
-		"name": "loginOrganization",
+		"name": "loginCompany",
 		"outputs": [],
 		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "id",
+				"type": "uint256"
+			}
+		],
+		"name": "getCompany",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
 		"type": "function"
 	},
 	{
