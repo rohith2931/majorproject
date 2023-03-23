@@ -212,61 +212,77 @@ function Login(props){
   return (
     <>
       <div>Login</div>
-      <button onClick={handleContracts}>load contract</button>
-      <label>Your Wallet Id is:</label>
-      <input type="text" readOnly value={account}></input>
       {isUser && <form onSubmit={e => {handleUser(e)}}>
-          <div className="form-group w-75">
-              <label for="username">username
-                  <textarea name="username" className="form-control w-100" id="name" rows="2" onChange={handleUsername}/>
-              </label>
-              <br/>
-              <br/>
-              <label for="userid">Password
-                  <textarea name="userid" className="form-control w-100" id="id" rows="2" onChange={handleUserId}/>
-              </label>
-              <br/>
-              <br/>
-          </div>
-          <button type="submit"  className="btn btn-primary mb-2">Log in</button>
+      <div className="row">
+        <div className="col-sm-3"></div>
+        <div className="col-sm-6 bg-light mt-4 p-4 " style={{marginLeft:'20px',marginRight:'20px',border:'2px solid black',borderRadius:'10px',boxShadow:'2px 2px 4px black'}} id="registration">
+                <div className="form-group m-3">
+                  <div className="d-flex justify-content-center m-3">
+                    <button onClick={handleContracts} class="btn btn-primary ">load contract</button>
+                  </div>
+                  <label className="input-label m-1">Your Wallet Id is:</label>
+                  <input type="text" className="form-control m-1" readOnly value={account}></input>
+                </div>
+                <div className="form-group m-3">
+                  <label for="username" className="input-label m-1">Username</label>
+					        <input type="password"  name="username" id="name" className="form-control m-1" placeholder="Username" onChange={handleUsername}/>
+                </div>
+                <div className="form-group m-3">
+                <label for="userid" className="input-label m-1">Password</label>
+					      <input type="password"  name="userid" id="id" className="form-control m-1" placeholder="Password" onChange={handleUserId}/>
+                </div>
+                <div className="form-group d-flex justify-content-center m-3">
+                    <button type="submit"  className="btn btn-primary">Log in</button>
+                </div> 
+        </div>
+        <div className="col-sm-3"></div>  
+    </div>
+          
       </form>}
-
-
+		
       {
         isCompany && 
         <form onSubmit={e=>handleCompany(e)}>
-           <div className="form-group w-75">
-              <label for="username">Company Name
-                  <textarea name="username" className="form-control w-100" id="name" rows="2" onChange={handleUsername}/>
-              </label>
-              <br/>
-              <br/>
-              <label for="userid">Password
-                  <textarea name="userid" className="form-control w-100" id="id" rows="2" onChange={handleUserId}/>
-              </label>
-              <br/>
-              <br/>
-          </div>
-          <button type="submit" >Log in </button>
+                <div className="row">
+        <div className="col-sm-3"></div>
+        <div className="col-sm-6 bg-light mt-4 p-4 " style={{marginLeft:'20px',marginRight:'20px',border:'2px solid black',borderRadius:'10px',boxShadow:'2px 2px 4px black'}} id="registration">
+                <div className="form-group m-3">
+                  <label for="username" className="input-label m-1">Username</label>
+					        <input type="password"  name="username" id="name" className="form-control m-1" placeholder="Username" onChange={handleUsername}/>
+                </div>
+                <div className="form-group m-3">
+                <label for="userid" className="input-label m-1">Password</label>
+					      <input type="password"  name="userid" id="id" className="form-control m-1" placeholder="Password" onChange={handleUserId}/>
+                </div>
+                <div className="form-group d-flex justify-content-center m-3">
+                    <button type="submit"  className="btn btn-primary">Log in</button>
+                </div> 
+        </div>
+        <div className="col-sm-3"></div>  
+      </div>
         </form>
       }
 
 {
         isInstitute && 
         <form onSubmit={e=>handleInstitute(e)}>
-           <div className="form-group w-75">
-              <label for="username">Institute Name
-                  <textarea name="username" className="form-control w-100" id="name" rows="2" onChange={handleUsername}/>
-              </label>
-              <br/>
-              <br/>
-              <label for="userid">Password
-                  <textarea name="userid" className="form-control w-100" id="id" rows="2" onChange={handleUserId}/>
-              </label>
-              <br/>
-              <br/>
-          </div>
-          <button type="submit" >Log in </button>
+        <div className="row">
+        <div className="col-sm-3"></div>
+        <div className="col-sm-6 bg-light mt-4 p-4 " style={{marginLeft:'20px',marginRight:'20px',border:'2px solid black',borderRadius:'10px',boxShadow:'2px 2px 4px black'}} id="registration">
+                <div className="form-group m-3">
+                  <label for="username" className="input-label m-1">Username</label>
+					        <input type="password"  name="username" id="name" className="form-control m-1" placeholder="Username" onChange={handleUsername}/>
+                </div>
+                <div className="form-group m-3">
+                <label for="userid" className="input-label m-1">Password</label>
+					      <input type="password"  name="userid" id="id" className="form-control m-1" placeholder="Password" onChange={handleUserId}/>
+                </div>
+                <div className="form-group d-flex justify-content-center m-3">
+                    <button type="submit"  className="btn btn-primary">Log in</button>
+                </div> 
+        </div>
+        <div className="col-sm-3"></div>  
+    </div>
         </form>
       }
       

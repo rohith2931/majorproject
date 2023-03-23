@@ -206,25 +206,39 @@ function SignUp(props) {
   return (
     <>
       <div>Sign Up</div>
-      <button onClick={handleContracts} class="btn btn-primary">load contract</button>
+      <div className="form-group m-3">
+          <div className="d-flex justify-content-center m-3">
+            <button onClick={handleContracts} className="btn btn-primary">load contract</button>
+          </div>
+      </div>
       <form onSubmit={(e) => handleFormSubmit(e)}>
-        <label>Enter Username :</label>
-        <input type={"text"} class="form-control" name="username"/>
-        <label>Enter Password :</label>
-        <input type={"password"} name="password" />
-        <label>Enter Role:</label>
-        <select name="role">
-          <option value="user" defaultChecked>
-            User
-          </option>
-          <option value="institute">Institute</option>
-          <option value="company">Company</option>
-        </select>
-        <button type="submit">Submit</button>
-      </form>
+      <div className="row">
+        <div className="col-sm-3"></div>
+        <div className="col-sm-6 bg-light mt-4 p-4 " style={{marginLeft:'20px',marginRight:'20px',border:'2px solid black',borderRadius:'10px',boxShadow:'2px 2px 4px black'}} id="registration">
+        <div className="form-group m-3">
+          <label className="input-label m-1">Enter Username :</label>
+          <input type={"text"}  className="form-control m-1" name="username" placeholder="Username"/>
+        </div>
+        <div className="form-group m-3">
+          <label className="input-label m-1">Enter Password :</label>
+          <input type={"password"} name="password" placeholder="Password" className="form-control m-1" />
+        </div>
+        <div class="form-group m-3">
+            <label for="role">Select Role:</label>
+              <select name="role" id="role" class="form-select">
+                <option value="user" defaultChecked>User</option>
+                <option value="institute">Institute</option>
+                <option value="company">Company</option>
+              </select>    
+        </div>
+        <div className="form-group d-flex justify-content-center m-3">
+            <button type="submit" className="btn btn-primary">Submit</button>
+        </div>     
+      </div>
+      <div className="col-sm-3"></div>  
+      </div>
+    </form>
     </>
-    
   );
 }
-
 export default SignUp;
