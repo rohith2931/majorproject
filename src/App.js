@@ -8,9 +8,9 @@ import OrganizationDash from "./components/OrganizationDash";
 import SignUp from "./components/SignUp";
 
 function App() {
-  localStorage.setItem("isUserLogin",false);
-  localStorage.setItem("isCompanyLogin",false);
-  localStorage.setItem("isInstituteLogin",false);
+  // localStorage.setItem("isUserLogin",false);
+  // localStorage.setItem("isCompanyLogin",false);
+  // localStorage.setItem("isInstituteLogin",false);
 
   return (
     <div>

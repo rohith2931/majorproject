@@ -8,6 +8,7 @@ import Web3 from "web3";
 import { useNavigate } from "react-router-dom";
 import { useEffect,useState } from "react";
 import bcrypt from 'bcryptjs';
+import React, { useRef } from 'react';
 
 function Login(props){
   const [account,setAccount]=useState('');
@@ -17,14 +18,20 @@ function Login(props){
   const [instituteContract, setInstituteContract] = useState("");
   const [companyContract, setCompanyContract] = useState("");
 
-  
-  
+  // Counts
   const [userCount,setUserCount]=useState('');
   const [orgCount,setOrgCount]=useState('');
+
   const [username,setUsername]=useState('');
   const [userid,setUserId]=useState('');
+  
   const {isUser,isInstitute,isCompany}=props;
   const navigate=useNavigate();
+
+  // Login References
+  const getUserName = localStorage.getItem("userData");
+  const getInstituteName = localStorage.getItem("instituteData");
+  const getCompanyName = localStorage.getItem("companyData");
 
   useEffect(() => {
     loadWeb3();
@@ -87,8 +94,9 @@ function Login(props){
       console.log(post)
       if(post[1]==name&&bcrypt.compareSync(id,post[2])){
         console.log("succesful login")
-        localStorage.setItem("isUserLogin",true);
-
+        // localStorage.setItem("isUserLogin",true);
+        // localStorage.setItem("userData", name);
+        localStorage.setItem("Login", "user");
         navigate("/userDash",{state:{post:post}})
       }
     }   
@@ -102,8 +110,10 @@ function Login(props){
       console.log(post)
       if(post[1]==name&&bcrypt.compareSync(id,post[2])){
         console.log("succesful login")
-        localStorage.setItem("isCompanyLogin",true);
-
+        // localStorage.setItem("isCompanyLogin",true);
+        // localStorage.setItem("companyData", name);
+        localStorage.setItem("Login", "company");
+        localStorage.setItem("CompanyName",post[3]);
         navigate("/companyDash");
       }
     }
@@ -118,8 +128,10 @@ function Login(props){
       console.log(post)
       if(post[1]==name&&bcrypt.compareSync(id,post[2])){
         console.log("succesful login")
-        localStorage.setItem("isInstituteLogin",true);
-
+        //localStorage.setItem("isInstituteLogin",true);
+        //localStorage.setItem("instituteData", name);
+        localStorage.setItem("Login", "institute");
+        localStorage.setItem("InstituteName",post[3]);
         navigate("/instituteDash");
       }
     }
@@ -247,7 +259,7 @@ function Login(props){
               <br/>
               <br/>
           </div>
-          <button type="submit" >Log in </button>
+          <button type="submit">Log in </button>
         </form>
       }
 

@@ -1,27 +1,14 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 // import { useHistory } from "react-router-dom";
-function UserDash(props) {
+function ShowUser(props) {
   const navigate=useNavigate();
-  // const history = useHistory();
-  
 
-  // if(localStorage.getItem("isUserLogin")==="false"){
-  //   navigate('/userLogin')
-  // }
   const { state } = useLocation();
   const { post } = state||props.state;
   const username=post[1] 
   console.log(post);
   
-  useEffect(()=>{
-    if(localStorage.getItem("Login")!=="user" && !props.state.OrgDash){
-      // history.push('/home');
-      console.log("user dash -----")
-      console.log(props.OrgDash)
-      navigate('/home')
-    }
-  },[])
 
   let posts=[];
   for (let i = 0; i < post[3].length; i++) {
@@ -66,14 +53,9 @@ function UserDash(props) {
 
   return (
     <>
-      {   <div> <div>User Dashboard</div>
-
-      <button onClick={handleLogout}>Logout</button>
-
-      <div>
-        welcome {post[8]}
-      </div></div>}
-
+      
+         <div><strong>Name :</strong>{post[8]}</div>
+      
       <h3>Working Status:</h3>
       {employee_status && <strong>Working</strong>}
       {!employee_status && <strong>Unemployed</strong>}
@@ -94,4 +76,4 @@ function UserDash(props) {
   );
 }
 
-export default UserDash;
+export default ShowUser;

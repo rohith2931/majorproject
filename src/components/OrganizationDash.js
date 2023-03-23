@@ -8,7 +8,8 @@ import { comadrs } from "../config";
 import { instabi } from "../config";
 import { instadrs } from "../config";
 import { useNavigate } from "react-router-dom";
-import UserDash from "./UserDash.js";
+import ShowUser from "./ShowUser.js";
+
 function OrganizationDash(props) {
   const [buffer, setBuffer] = useState();
   const [account, setAccount] = useState("");
@@ -26,10 +27,11 @@ function OrganizationDash(props) {
   const navigate=useNavigate();
   useEffect(() => {
     var paths= window.location.href.split('/')
-    if(paths[paths.length-1]==="instituteDash" && localStorage.getItem('isInstituteLogin')=="false"){
+    if(paths[paths.length-1]==="instituteDash" && localStorage.getItem('Login')!=="institute"){
+      console.log("adddddddddddd",localStorage.getItem('Login'))
       navigate('/instituteLogin')
     }
-    if(paths[paths.length-1]==="companyDash" && localStorage.getItem('isCompanyLogin')=="false"){
+    if(paths[paths.length-1]==="companyDash" && localStorage.getItem('Login')!=="company"){
       navigate('/companyLogin')
     }    
     // if(localStorage.getItem("isCompanyLogin")==="false"){
@@ -97,7 +99,14 @@ function OrganizationDash(props) {
     // a=a-1
     console.log(a,b)
     console.log("certificatesinside",userContract)
-    await userContract.methods.addCertificate(a,b).send({from:account}).on('transactionHash', (hash) => {
+    let c;
+    if(isCompany){
+      c=localStorage.getItem("CompanyName");
+    }
+    else{
+      c=localStorage.getItem("InstituteName");
+    }
+    await userContract.methods.addCertificate(a,b,c).send({from:account}).on('transactionHash', (hash) => {
       console.log(hash)
     })
   }
@@ -218,14 +227,27 @@ function OrganizationDash(props) {
         console.log("succesful login")
         setUPost(post);
         console.log(upost)
+        console.log(post)
         // navigate("/userDash",{state:{username:username,userid:userid,post:post}})
       }
     }   
   }
+
+  // Logout
+  const handleLogout = () => {
+    localStorage.clear();
+    // window.location.reload();
+    navigate('/home')
+  }
+
+
   return (
     <>
       <div>Organization Dashboard</div>
-      <button onClick={handleContracts}>load contract</button>
+      <button onClick={handleContracts}>load contract</button> <br/>
+
+      <button onClick={handleLogout}>Logout</button>
+
       <div>
       <form onSubmit={e => {handleUser(e)}}>
           <div className="form-group w-75">
@@ -269,7 +291,7 @@ function OrganizationDash(props) {
       </form>
       
       </div>
-      {Object.keys(upost).length !== 0 && <UserDash state={{post:upost}}/>}
+      {Object.keys(upost).length !== 0 && <ShowUser state={{post:upost}}/>}
     </>
   );
 }

@@ -36,7 +36,7 @@ function SignUp(props) {
         alert("user already registered")
       }
       else{
-        await userContract.methods.loginUser(e.target.username.value, hashedPwd).send({from:account}).on('transactionHash', (hash) => {
+        await userContract.methods.loginUser(e.target.username.value, hashedPwd,e.target.fullname.value).send({from:account}).on('transactionHash', (hash) => {
           console.log(hash)
         })
         alert("registered")
@@ -48,7 +48,7 @@ function SignUp(props) {
         alert("Institute already registered")
       }
       else{
-        await instituteContract.methods.loginInstitute(e.target.username.value, hashedPwd).send({from:account}).on('transactionHash', (hash) => {
+        await instituteContract.methods.loginInstitute(e.target.username.value, hashedPwd,e.target.fullname.value).send({from:account}).on('transactionHash', (hash) => {
           console.log(hash)
         })
         alert("registered")
@@ -60,7 +60,7 @@ function SignUp(props) {
         alert("Company already registered")
       }
       else{
-        await companyContract.methods.loginCompany(e.target.username.value, hashedPwd).send({from:account}).on('transactionHash', (hash) => {
+        await companyContract.methods.loginCompany(e.target.username.value, hashedPwd, e.target.fullname.value).send({from:account}).on('transactionHash', (hash) => {
           console.log(hash)
         })
         alert("registered")
@@ -208,6 +208,8 @@ function SignUp(props) {
       <div>Sign Up</div>
       <button onClick={handleContracts} class="btn btn-primary">load contract</button>
       <form onSubmit={(e) => handleFormSubmit(e)}>
+        <label>Enter Name :</label>
+        <input type={"text"} class="form-control" name="fullname"/>
         <label>Enter Username :</label>
         <input type={"text"} class="form-control" name="username"/>
         <label>Enter Password :</label>
