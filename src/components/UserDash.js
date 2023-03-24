@@ -15,32 +15,34 @@ function UserDash(props) {
   console.log(post);
   
   useEffect(()=>{
-    if(localStorage.getItem("Login")!=="user" && !props.state.OrgDash){
+    if(localStorage.getItem("Login")!=="user" ){
       // history.push('/home');
       console.log("user dash -----")
-      console.log(props.OrgDash)
+
       navigate('/home')
     }
-  },[])
+  }, [])
 
   let posts=[];
   for (let i = 0; i < post[3].length; i++) {
     posts.push(
+      <div className="col">
         <div className="card mt-5 w-100 shadow-lg" key={i}>
-        <div className="card-body">
           {post[3][i].indexOf(".ipfs.w3s.link/image.png") != -1 && (
-            <div class="embed-responsive embed-responsive-21by9">
-              <img src={"https://" + post[3][i]} alt="" style={{ height: "800px", width: "800px" }}></img>
+            <div className="embed-responsive embed-responsive-21by9">
+              <img src={"https://" + post[3][i]} alt="" style={{  width:"10" }}></img>
               <br/>
-              <div>{post[4][i]}</div>
+              {/* <div>{post[4][i]}</div> */}
             </div>
 
           )}
+        <div className="card-body">
           
-        </div>
-        <div class="card-footer">
             <strong>Issued by: </strong>{post[5][i]}
         </div>
+        {/* <div className="card-footer">
+        </div> */}
+      </div>
       </div>
     );
   }
@@ -92,7 +94,7 @@ function UserDash(props) {
       
       
       <div className="d-flex justify-content-center display-6" style={{fontSize:"30px"}}><b>Your available certificates are:</b></div>
-      <div className="d-flex justify-content-center">
+      <div className="row row-cols-2 row-cols-md-3 g-3">
       {
         (posts.length>0) && posts.map(post => post)
       }

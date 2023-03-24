@@ -1,0 +1,45 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap");
+.account-access .col-4{
+     height: 100vh;
+    display: flex;   
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    margin: 0px; 
+}
+.col-4:nth-child(odd){
+    background-color: rgb(245, 249, 254);
+}
+.account-ioc img{
+    width: 50%;
+    opacity: 0.5;
+}
+h2{
+    font-size: 30px;
+}
+.account-access p{
+    /* width: 80%; */
+    padding: 0% 10%;
+}
+.account-access-user-login,.account-access-company-login{
+    width :70%;
+    padding: 0.5em;
+    font-size: 20px;
+    border-radius: 20px;
+    background-color: #00B0FF;
+    color: black;
+    font-weight:600;
+}
+
+.account-access-institute-login{
+    width :70%;
+    padding: 0.5em;
+    font-size: 20px;
+    border-radius: 20px;
+    background-color: white;
+    color: black;
+    font-weight:600;
+}
+.account-access button:hover{
+    color: rgb(75, 75, 75);
+}

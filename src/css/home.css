@@ -1,0 +1,30 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap");
+.html{
+  background-color: white;
+}
+img {
+  width: 100%;
+}
+
+.screen {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-text {
+  padding: 0px 50px;
+}
+
+.main-title {
+  font-size: 4em;
+  line-height: 1.1;
+}
+
+.main-subtitle {
+  color: rgb(133, 129, 129);
+  text-align: justify;
+  text-justify: inter-word;
+}

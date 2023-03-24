@@ -16,7 +16,7 @@ function ShowUser(props) {
       <div className="card mt-5 w-100 shadow-lg" key={i}>
         <div className="card-body">
           {post[3][i].indexOf(".ipfs.w3s.link/image.png") != -1 && (
-            <div class="embed-responsive embed-responsive-21by9">
+            <div className="embed-responsive embed-responsive-21by9">
               <img src={"https://" + post[3][i]} alt="" style={{ height: "800px", width: "800px" }}></img>
               <br/>
               <div>{post[4][i]}</div>
@@ -25,7 +25,7 @@ function ShowUser(props) {
           )}
           
         </div>
-        <div class="card-footer">
+        <div className="card-footer">
             <strong>Issued by: </strong>{post[5]}
         </div>
       </div>

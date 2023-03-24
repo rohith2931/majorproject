@@ -207,7 +207,7 @@ function SignUp(props) {
     <>
       <div>Sign Up</div>
       <div className="d-flex justify-content-center m-3">
-        <button onClick={handleContracts} class="btn btn-primary">load contract</button>
+        <button onClick={handleContracts} className="btn btn-primary">load contract</button>
       </div>
       <form onSubmit={(e) => handleFormSubmit(e)}>
       <div className="row">
@@ -219,7 +219,7 @@ function SignUp(props) {
         </div> */}
         <div className="form-group m-3">
           <label className="input-label m-1">Enter Name :</label>
-            <input type={"text"} class="form-control m-1" name="fullname" placeholder="Name"/>
+            <input type={"text"} className="form-control m-1" name="fullname" placeholder="Name"/>
         </div>
         <div className="form-group m-3">
           <label className="input-label m-1">Enter Username :</label>
@@ -229,9 +229,9 @@ function SignUp(props) {
           <label className="input-label m-1">Enter Password :</label>
           <input type={"password"} name="password" placeholder="Password" className="form-control m-1" />
         </div>
-        <div class="form-group m-3">
+        <div className="form-group m-3">
             <label for="role">Select Role:</label>
-              <select name="role" id="role" class="form-select">
+              <select name="role" id="role" className="form-select">
                 <option value="user" defaultChecked>User</option>
                 <option value="institute">Institute</option>
                 <option value="company">Company</option>

@@ -6,7 +6,8 @@ import NavBar from "./components/NavBar";
 import UserDash from "./components/UserDash";
 import OrganizationDash from "./components/OrganizationDash";
 import SignUp from "./components/SignUp";
-
+import Footer from "./components/Footer";
+import AccountAccess from "./components/AccountAccess";
 function App() {
   // localStorage.setItem("isUserLogin",false);
   // localStorage.setItem("isCompanyLogin",false);
@@ -15,6 +16,7 @@ function App() {
   return (
     <div>
       <NavBar />
+      <div className="container">
       <Routes>
         <Route exact path="/" element={<Home />} />
         <Route exact path="/home" element={<Home />} />
@@ -23,9 +25,12 @@ function App() {
         <Route exact path="/companyLogin" element={<Login isCompany={true}/>} />
         <Route exact path="/signUp" element={<SignUp/>} />
         <Route exact path="/userDash" element={<UserDash />} />
+        <Route exact path="/accountAccess" element={<AccountAccess />} />
         <Route exact path="/instituteDash" element={<OrganizationDash isInstitute={true}/>} />
         <Route exact path="/companyDash" element={<OrganizationDash isCompany={true}/>} />
       </Routes>
+      </div>
+      <Footer/>
     </div>
   );
 }
