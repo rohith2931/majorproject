@@ -26,7 +26,7 @@ function UserDash(props) {
   let posts=[];
   for (let i = 0; i < post[3].length; i++) {
     posts.push(
-      <div className="card mt-5 w-100 shadow-lg" key={i}>
+        <div className="card mt-5 w-100 shadow-lg" key={i}>
         <div className="card-body">
           {post[3][i].indexOf(".ipfs.w3s.link/image.png") != -1 && (
             <div class="embed-responsive embed-responsive-21by9">
@@ -39,7 +39,7 @@ function UserDash(props) {
           
         </div>
         <div class="card-footer">
-            <strong>Issued by: </strong>{post[5]}
+            <strong>Issued by: </strong>{post[5][i]}
         </div>
       </div>
     );
@@ -61,34 +61,46 @@ function UserDash(props) {
    // Logout
    const handleLogout = () => {
     localStorage.clear();
-    window.location.reload();
+    // window.location.reload();
+    navigate('/home')
   }
 
   return (
     <>
       {   <div> <div>User Dashboard</div>
+      <div className="d-flex justify-content-end ">
+        <button className="btn btn-primary" onClick={handleLogout}>Logout</button>
+      </div>
 
-      <button onClick={handleLogout}>Logout</button>
 
-      <div>
-        welcome {post[8]}
-      </div></div>}
-
-      <h3>Working Status:</h3>
-      {employee_status && <strong>Working</strong>}
-      {!employee_status && <strong>Unemployed</strong>}
-
-      <div>Your Experience:</div>
+      <div className="d-flex justify-content-center display-5"><b>Welcome {post[8]}</b></div>
+        </div>}
+  <div className="d-flex justify-content-center m-4" >
+  <div className="card" style={{borderRadius:'10px',boxShadow:'2px 2px 4px black'}}>
+    <ul className="list-group list-group-flush">
+    <li className="list-group-item"><h5>Working Status : 
+      {employee_status && <p className="d-inline">&nbsp;Working</p>}
+      {!employee_status && <p className="d-inline">Unemployed</p>}
+      </h5></li>
+    <li className="list-group-item"><div>Your Experience:</div>
       <ul reversed>{post[6].slice().reverse().map((exp,index)=><strong key={index}><li>{exp}</li></strong>)}</ul>
-
-      <div>your available certificates are:</div>
-
+      </li>
+  </ul>
+  </div>  
+  </div>      
+  
+      
+      
+      <div className="d-flex justify-content-center display-6" style={{fontSize:"30px"}}><b>Your available certificates are:</b></div>
+      <div className="d-flex justify-content-center">
       {
         (posts.length>0) && posts.map(post => post)
       }
       {
         posts.length==0 &&<strong>No certificates are uploaded till now...</strong>
       }
+      </div>
+      
 
     </>
   );
