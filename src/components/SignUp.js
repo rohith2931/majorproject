@@ -27,6 +27,11 @@ function SignUp(props) {
 
   const handleFormSubmit = async(e) => {
     e.preventDefault();
+    console.log(e.target.username.value)
+    if(e.target.username.value==null || e.target.password.value==null || e.target.fullname.value==null ){
+      alert("Please enter valid credentials");
+      return;
+    }
 
     const hashedPwd = bcrypt.hashSync(e.target.password.value, 8);
     
@@ -205,7 +210,7 @@ function SignUp(props) {
   // console.log(username, password, role);
   return (
     <>
-      <div>Sign Up</div>
+      {/* <div>Sign Up</div> */}
       <div className="d-flex justify-content-center m-3">
         <button onClick={handleContracts} className="btn btn-primary">load contract</button>
       </div>
@@ -219,15 +224,15 @@ function SignUp(props) {
         </div> */}
         <div className="form-group m-3">
           <label className="input-label m-1">Enter Name :</label>
-            <input type={"text"} className="form-control m-1" name="fullname" placeholder="Name"/>
+            <input type={"text"} className="form-control m-1" required pattern="[A-Za-z]{3,}" title="Enter minimum of three characters" name="fullname" placeholder="Name"/>
         </div>
         <div className="form-group m-3">
           <label className="input-label m-1">Enter Username :</label>
-          <input type={"text"}  className="form-control m-1" name="username" placeholder="Username"/>
+          <input type={"text"}  className="form-control m-1" required pattern="[A-Za-z][A-Za-z0-9]{5,}" title="Enter minimum of six characters" name="username" placeholder="Username"/>
         </div>
         <div className="form-group m-3">
           <label className="input-label m-1">Enter Password :</label>
-          <input type={"password"} name="password" placeholder="Password" className="form-control m-1" />
+          <input type={"password"} name="password" placeholder="Password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" title="Password must contain a mix of letters, numbers, and special characters" className="form-control m-1" />
         </div>
         <div className="form-group m-3">
             <label for="role">Select Role:</label>

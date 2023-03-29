@@ -12,35 +12,36 @@ import ShowUser from "./ShowUser.js";
 
 function OrganizationDash(props) {
   const [buffer, setBuffer] = useState();
+  const [ind,setInd]=useState(0);
   const [account, setAccount] = useState("");
   const [userContract, setUserContract] = useState();
   const [comContract, setComContract] = useState("");
-  const [userCount,setUserCount]=useState('');
-  const [orgCount,setComCount]=useState('');
-  const [username,setUsername]=useState('');
-  const [userid,setUserId]=useState('');
+  const [userCount, setUserCount] = useState('');
+  const [orgCount, setComCount] = useState('');
+  const [username, setUsername] = useState('');
+  const [userid, setUserId] = useState('');
   const [instituteContract, setInstituteContract] = useState("");
   const [companyContract, setCompanyContract] = useState("");
 
-  const [upost,setUPost] = useState({});
-  const {isCompany,isInstitute} = props;
-  const navigate=useNavigate();
+  const [upost, setUPost] = useState({});
+  const { isCompany, isInstitute } = props;
+  const navigate = useNavigate();
   useEffect(() => {
-    var paths= window.location.href.split('/')
-    if(paths[paths.length-1]==="instituteDash" && localStorage.getItem('Login')!=="institute"){
-      console.log("adddddddddddd",localStorage.getItem('Login'))
+    var paths = window.location.href.split('/')
+    if (paths[paths.length - 1] === "instituteDash" && localStorage.getItem('Login') !== "institute") {
+      console.log("adddddddddddd", localStorage.getItem('Login'))
       navigate('/instituteLogin')
     }
-    if(paths[paths.length-1]==="companyDash" && localStorage.getItem('Login')!=="company"){
+    if (paths[paths.length - 1] === "companyDash" && localStorage.getItem('Login') !== "company") {
       navigate('/companyLogin')
-    }    
+    }
     // if(localStorage.getItem("isCompanyLogin")==="false"){
     //   navigate('/companyLogin');
     // }
     loadWeb3();
 
   }, []);
-  const handleUsername=(e)=>{
+  const handleUsername = (e) => {
     setUsername(e.target.value)
     console.log(username)
   }
@@ -60,9 +61,9 @@ function OrganizationDash(props) {
     console.log(cid);
     cid = cid + ".ipfs.w3s.link/image.png";
     console.log(cid);
-    await addCert(username,cid);
+    await addCert(username, cid);
   }
-  const handleContracts= async ()=>{
+  const handleContracts = async () => {
     const web3 = window.web3;
     const usContract = await new web3.eth.Contract(userabi, useradrs);
     console.log(usContract);
@@ -79,34 +80,36 @@ function OrganizationDash(props) {
   }
 
 
-  async function handleExperience(e){
+  async function handleExperience(e) {
     e.preventDefault();
-    const username=e.target.username.value;
-    const experience=e.target.experience.value;
+    const username = e.target.username.value;
+    const experience = e.target.employment.value+' '+e.target.date.value;
     await addExp(username, experience);
   }
-  async function addExp(a,b) {
-    console.log(a,b)
-    console.log("Experience ",userContract)
-    await userContract.methods.addExperience(a,b).send({from:account}).on('transactionHash', (hash) => {
+  async function addExp(a, b) {
+    console.log(a, b)
+    b=b+' '+localStorage.getItem("CompanyName");
+    console.log(a, b)
+    console.log("Experience ", userContract)
+    await userContract.methods.addExperience(a, b).send({ from: account }).on('transactionHash', (hash) => {
       console.log(hash)
     })
   }
 
 
-  async function addCert(a,b) {
+  async function addCert(a, b) {
     // a=parseInt(a)
     // a=a-1
-    console.log(a,b)
-    console.log("certificatesinside",userContract)
+    console.log(a, b)
+    console.log("certificatesinside", userContract)
     let c;
-    if(isCompany){
-      c=localStorage.getItem("CompanyName");
+    if (isCompany) {
+      c = localStorage.getItem("CompanyName");
     }
-    else{
-      c=localStorage.getItem("InstituteName");
+    else {
+      c = localStorage.getItem("InstituteName");
     }
-    await userContract.methods.addCertificate(a,b,c).send({from:account}).on('transactionHash', (hash) => {
+    await userContract.methods.addCertificate(a, b, c).send({ from: account }).on('transactionHash', (hash) => {
       console.log(hash)
     })
   }
@@ -138,16 +141,16 @@ function OrganizationDash(props) {
     if (networkId === 11155111) {
       const usContract = await new web3.eth.Contract(userabi, useradrs);
       console.log(usContract);
-      console.log(account,networkId)
+      console.log(account, networkId)
       // userContract=usContract;
       setUserContract(usContract);
       console.log(userContract)
-      
-      
+
+
       const instContract = await new web3.eth.Contract(instabi, instadrs);
       setInstituteContract(instContract);
       console.log(instContract);
-      
+
       const comContract = await new web3.eth.Contract(comabi, comadrs);
       setCompanyContract(comContract);
       console.log(comContract);
@@ -159,7 +162,7 @@ function OrganizationDash(props) {
       // console.log(userContract,orgContract);
       console.log("Gg")
       // this.setState({ orgContract: orgContract });
-      
+
       const userCount = await userContract.methods.getCount().call();
       // const orgCount = await orgContract.methods.getCount().call();
       // this.setState({ userCount });
@@ -171,12 +174,12 @@ function OrganizationDash(props) {
       // console.log(orgContract.methods);
       console.log(account);
       setUserContract(usContract);
-      console.log(userContract);  
+      console.log(userContract);
     } else {
       window.alert("Decentragram contract not deployed to detected network.");
     }
   }
-  
+
   function captureFile(event) {
     //console.log(event)
     event.preventDefault();
@@ -189,48 +192,50 @@ function OrganizationDash(props) {
     reader.onloadend = () => {
       console.log("pp");
       console.log(reader.result);
-    //   this.setState({ Buffer: reader.result });
+      //   this.setState({ Buffer: reader.result });
       setBuffer(reader.result);
     };
     console.log(buffer);
   }
-  async function checkUser(name,id){
+  async function checkUser(name, id) {
     console.log(userContract)
-    console.log(name,id)
-    const Count=await userContract.methods.getCount().call()
-    for(let i=0;i<Count;i++){
-      const post=await userContract.methods.getUser(i).call()
+    console.log(name, id)
+    const Count = await userContract.methods.getCount().call()
+    for (let i = 0; i < Count; i++) {
+      const post = await userContract.methods.getUser(i).call()
       console.log(post)
-      if(post[1]==name){
+      if (post[1] == name) {
         console.log("succesful login")
         // await addCert(i,'p')
       }
     }
-        
+
   }
-  const handleUser=async (e)=>{
+  const handleUser = async (e) => {
     e.preventDefault();
-    console.log(username,userContract,userid)
-    await checkUser(username,userid)
+    console.log(username, userContract, userid)
+    await checkUser(username, userid)
   }
+  // const select =  (e,ind) => {
+  //   setInd(ind)
+  // }
 
-
-  const handleSearch=async(e)=>{
+  const handleSearch = async (e) => {
     e.preventDefault();
     console.log(userContract)
     console.log(e.target.username.value)
-    const Count=await userContract.methods.getCount().call()
-    for(let i=0;i<Count;i++){
-      const post=await userContract.methods.getUser(i).call()
+    const Count = await userContract.methods.getCount().call()
+    for (let i = 0; i < Count; i++) {
+      const post = await userContract.methods.getUser(i).call()
       console.log(post)
-      if(post[1]==e.target.username.value){
+      if (post[1] == e.target.username.value) {
         console.log("succesful login")
         setUPost(post);
         console.log(upost)
         console.log(post)
         // navigate("/userDash",{state:{username:username,userid:userid,post:post}})
       }
-    }   
+    }
   }
 
   // Logout
@@ -239,59 +244,136 @@ function OrganizationDash(props) {
     // window.location.reload();
     navigate('/home')
   }
+  const setCSS = (e) => {
+    const zero = document.getElementById('zero');
+    const one = document.getElementById('one');
+    const two = document.getElementById('two');
+    if(one!=null){
+      one.style.backgroundColor ='white';
+      one.style.color='black';
+    }
+    zero.style.backgroundColor ='white';
+    zero.style.color='black';
+    two.style.backgroundColor ='white';
+    two.style.color='black';
 
-
+    e.target.style.backgroundColor='#0d6efd'
+    e.target.style.color='white'
+  }
+  const active = () => {
+    const links = document.querySelectorAll('.nav-link');
+if (links.length) {
+  links.forEach((link) => {
+    link.addEventListener('click', (e) => {
+      links.forEach((link) => {
+          link.classList.remove('active');
+      });
+      e.preventDefault();
+      link.classList.add('active');
+    });
+  });
+}
+  }
   return (
     <>
-      <div>Organization Dashboard</div>
-      <button onClick={handleContracts}>load contract</button> <br/>
+      {/* <div className="d-flex justify-content-end">
+        <button className="btn btn-primary m-2" onClick={handleLogout}>Logout</button>
+      </div> */}
+      <div className="d-flex justify-content-center">
+        <button className="btn btn-primary" onClick={handleContracts}>load contract</button> <br />
+      </div>
 
-      <button onClick={handleLogout}>Logout</button>
+      <div className="container row mt-4">
+        <div className="col-sm-4 d-flex justify-content-center" >
+          {isCompany && <button className="btn w-100"  id='one' onClick={(e)=>{setInd(1);setCSS(e);}}>ADD EXPERIENCE</button>}
+        </div>
+        <div className="col-sm-4 d-flex justify-content-center">
+          <button className="btn w-100" id='zero' onClick={(e)=>{setInd(0);setCSS(e);}}>ADD CERTIFICATES</button>
+        </div>
+        <div className="col-sm-4 d-flex justify-content-center">
+          <button className="btn w-100" id='two' onClick={(e)=>{setInd(2);setCSS(e);}}>SEARCH USER</button>
+        </div>
+      </div>
+
+      
+      
+      
+
 
       <div>
-      <form onSubmit={e => {handleUser(e)}}>
-          <div className="form-group w-75">
-              <label for="username">username
-                  <textarea name="username" className="form-control w-100" id="name" rows="2" onChange={handleUsername}/>
-              </label>
-              <br/>
-              <br/>
-              {/* <label for="userid">userid
-                  <textarea name="userid" className="form-control w-100" id="id" rows="2" onChange={handleUserId}/>
-              </label> */}
-              <br/>
-              <label for="post">
-                    <input type="file" name="image" accept=".png, .jpg, .jpeg" onChange={e=>captureFile(e)}/>
-              </label>
-              <br/>
-          </div>
-          <button type="submit"  className="btn btn-primary mb-2">add Post</button>
-          {/* {buffer && <div>{buffer.byteength}</div>} */}
-      </form>
-      <button onClick={storeFiles}  className="btn btn-primary mb-2">addCertificate</button>
 
-      {isCompany &&
-        <form onSubmit={handleExperience}>
-        <label for="username">Username</label>
-        <input type="text" name="username"/>
-        
-        <label for ="experience">Experience</label>
-        <input type="text" id="experience" name="exper"/>
+        <div className="row d-flex justify-content-center">
+          {/* <div className="col-4"></div> */}
 
-      <button type="submit" className="btn btn-primary mb-2">add experience</button>
+        {isCompany && ind===1 &&
+  
+          <div className="col-sm-4 bg-light mt-4 p-4 m-2" style={{ border: '2px solid black', borderRadius: '10px', boxShadow: '2px 2px 4px black' }} id="registration">
+          <div className="text-success h3">Add Experience</div>
+            
+              <form onSubmit={handleExperience}>
+                <div className="form-group m-3">
+                  <label for="username" className="input-label m-1">Username</label>
+                  <input type="text" name="username" className="form-control m-1" />
+                </div>
+                
+                <div className="form-group m-3">
+                  
+                  <label for="employment">Select :</label>
+              <select name="employment" id="employment" className="form-select">
+                <option value="Start Date" defaultChecked>Start</option>
+                <option value="End Date">End</option>
+              </select>
+                </div>
+                <div className="form-group m-3">
+                  
+                    <label for="date">Enter Date :</label>
+                    <input type="date" id="date"></input>
+                </div>
+                <div className="form-group d-flex justify-content-center m-3">
+                  <button type="submit" className="btn btn-primary mb-2">Add experience</button>
+                </div>
 
-        
-      </form>}
+              </form>
+          </div>}
+
+          {ind===0 &&<div className="col-sm-4 bg-light mt-4 p-4 m-2" style={{ border: '2px solid black', borderRadius: '10px', boxShadow: '2px 2px 4px black' }} id="registration">
+            <div className="text-success h3">Add certificates</div>
+            <form onSubmit={e => { handleUser(e) }}>
+              <div className="form-group m-3">
+                <label for="username" className="input-label m-1">Username</label>
+                <input type="text" name="username" className="form-control m-1" id="name" placeholder="Username" onChange={handleUsername} />
+              </div>
+              <div className="form-group m-3">
+                <label for="post" className="input-label m-1"></label>
+                <input className="form-control m-1" type="file" name="image" accept=".png, .jpg, .jpeg" onChange={e => captureFile(e)} />
+              </div>
+              <div className="form-group d-flex justify-content-center m-3">
+                <button type="submit" className="btn btn-primary">Add Post</button>
+              </div>
+              <div className="form-group d-flex justify-content-center m-3">
+                <button onClick={storeFiles} className="btn btn-primary">AddCertificate</button>
+              </div>
+            </form>
+          </div>}
 
 
-      <form onSubmit={(e)=>handleSearch(e)}>
-        <label for="username">Username</label>
-        <input type="text" name="username"/>
-        <button type="submit" className="btn btn-primary mb-2">Search</button>
-      </form>
-      
+          {ind===2 &&<div className="col-sm-3 bg-light mt-4 p-4 m-2" style={{ border: '2px solid black', borderRadius: '10px', boxShadow: '2px 2px 4px black' }} id="registration">
+          <div className="text-success h3">Search User</div>
+            
+            <form onSubmit={(e) => handleSearch(e)}>
+              <div className="form-group m-3">
+                <label for="username" className="input-label m-1">Username</label>
+                <input type="text" name="username" className="form-control m-1" />
+              </div>
+              <div className="form-group d-flex justify-content-center m-3 mt-4">
+                <button type="submit" className="btn btn-primary">Search</button>
+              </div>
+
+            </form>
+          </div>}
+        </div>
       </div>
-      {Object.keys(upost).length !== 0 && <ShowUser state={{post:upost}}/>}
+      {Object.keys(upost).length !== 0 && <ShowUser state={{ post: upost }} />}
     </>
   );
 }

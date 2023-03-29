@@ -13,21 +13,23 @@ function ShowUser(props) {
   let posts=[];
   for (let i = 0; i < post[3].length; i++) {
     posts.push(
+      <div className="col">
       <div className="card mt-5 w-100 shadow-lg" key={i}>
-        <div className="card-body">
+        {/* <div className="card-body"> */}
           {post[3][i].indexOf(".ipfs.w3s.link/image.png") != -1 && (
             <div className="embed-responsive embed-responsive-21by9">
-              <img src={"https://" + post[3][i]} alt="" style={{ height: "800px", width: "800px" }}></img>
+              <img src={"https://" + post[3][i]} alt="" style={{ width:"10" }}></img>
               <br/>
               <div>{post[4][i]}</div>
             </div>
 
           )}
           
-        </div>
+        {/* </div> */}
         <div className="card-footer">
-            <strong>Issued by: </strong>{post[5]}
+            <strong>Issued by: </strong>{post[5][i]}
         </div>
+      </div>
       </div>
     );
   }
@@ -54,23 +56,34 @@ function ShowUser(props) {
   return (
     <>
       
-         <div><strong>Name :</strong>{post[8]}</div>
+         
       
-      <h3>Working Status:</h3>
-      {employee_status && <strong>Working</strong>}
-      {!employee_status && <strong>Unemployed</strong>}
-
-      <div>Your Experience:</div>
+  <div className="d-flex justify-content-center m-4" >
+  <div className="card" style={{borderRadius:'10px',boxShadow:'2px 2px 4px black'}}>
+    <ul className="list-group list-group-flush">
+     <li className="list-group-item">
+     <div><strong>Name :&nbsp;</strong>{post[8]}</div>
+      </li> 
+    <li className="list-group-item"><h5>Working Status : 
+      {employee_status && <p className="d-inline">&nbsp;Working</p>}
+      {!employee_status && <p className="d-inline">Unemployed</p>}
+      </h5></li>
+    <li className="list-group-item"><div>His/Her Experience:</div>
       <ul reversed>{post[6].slice().reverse().map((exp,index)=><strong key={index}><li>{exp}</li></strong>)}</ul>
+      </li>
+  </ul>
+  </div>  
+  </div>   
 
-      <div>your available certificates are:</div>
-
+      <div className="d-flex justify-content-center display-6" style={{fontSize:"30px"}}><b>His/Her available certificates are:</b></div>
+      <div className="row row-cols-2 row-cols-md-3 g-3">
       {
         (posts.length>0) && posts.map(post => post)
       }
       {
         posts.length==0 &&<strong>No certificates are uploaded till now...</strong>
       }
+      </div>
 
     </>
   );

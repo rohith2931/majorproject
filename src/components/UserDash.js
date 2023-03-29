@@ -9,19 +9,31 @@ function UserDash(props) {
   // if(localStorage.getItem("isUserLogin")==="false"){
   //   navigate('/userLogin')
   // }
+  let temp_post ={}
+  const location = useLocation();
   const { state } = useLocation();
-  const { post } = state||props.state;
-  const username=post[1] 
-  console.log(post);
+  if(state === null ){
+    temp_post= {}
+  }
+  else{
+    temp_post = state || props.state;
+    temp_post = temp_post["post"]
+  }
   
   useEffect(()=>{
     if(localStorage.getItem("Login")!=="user" ){
-      // history.push('/home');
-      console.log("user dash -----")
-
-      navigate('/home')
+      navigate('/userLogin')
     }
   }, [])
+
+  const post = temp_post
+  if(Object.keys(post).length >0){ 
+  
+  // console.log("pros ==null--1")
+  console.log()
+  // const post = props;
+  const username=post[1] 
+  console.log(post);
 
   let posts=[];
   for (let i = 0; i < post[3].length; i++) {
@@ -69,10 +81,11 @@ function UserDash(props) {
 
   return (
     <>
-      {   <div> <div>User Dashboard</div>
-      <div className="d-flex justify-content-end ">
+      {   <div> 
+        {/* <div>User Dashboard</div> */}
+      {/* <div className="d-flex justify-content-end ">
         <button className="btn btn-primary" onClick={handleLogout}>Logout</button>
-      </div>
+      </div> */}
 
 
       <div className="d-flex justify-content-center display-5"><b>Welcome {post[8]}</b></div>
@@ -106,6 +119,10 @@ function UserDash(props) {
 
     </>
   );
+    }
+    else{
+      console.log("post is null");
+    }
 }
 
 export default UserDash;

@@ -219,7 +219,7 @@ function Login(props) {
   }
   return (
     <>
-      <div>Login</div>
+      {/* <div>Login</div> */}
       <div className="d-flex justify-content-center m-3">
         <button onClick={handleContracts} className="btn btn-primary ">
           load contract
@@ -251,6 +251,7 @@ function Login(props) {
                   </div> */}
                 <label className="input-label m-1">Your Wallet Id is:</label>
                 <input
+                  
                   type="text"
                   className="form-control m-1"
                   readOnly
@@ -262,6 +263,7 @@ function Login(props) {
                   Username
                 </label>
                 <input
+                  required
                   type="text"
                   name="username"
                   id="name"
@@ -275,6 +277,7 @@ function Login(props) {
                   Password
                 </label>
                 <input
+                  required
                   type="password"
                   name="userid"
                   id="id"
@@ -326,6 +329,7 @@ function Login(props) {
                   Username
                 </label>
                 <input
+                  required
                   type="text"
                   name="username"
                   id="name"
@@ -339,6 +343,7 @@ function Login(props) {
                   Password
                 </label>
                 <input
+                  required
                   type="password"
                   name="userid"
                   id="id"
@@ -390,6 +395,7 @@ function Login(props) {
                   Username
                 </label>
                 <input
+                  required
                   type="text"
                   name="username"
                   id="name"
@@ -403,6 +409,7 @@ function Login(props) {
                   Password
                 </label>
                 <input
+                  required
                   type="password"
                   name="userid"
                   id="id"
