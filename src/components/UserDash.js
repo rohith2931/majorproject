@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { ImageComponent } from "./ImageComponent";
 // import { useHistory } from "react-router-dom";
 function UserDash(props) {
   const navigate=useNavigate();
@@ -42,15 +43,18 @@ function UserDash(props) {
         <div className="card mt-5 w-100 shadow-lg" key={i}>
           {post[3][i].indexOf(".ipfs.w3s.link/image.png") != -1 && (
             <div className="embed-responsive embed-responsive-21by9">
-              <img src={"https://" + post[3][i]} alt="" style={{  width:"10" }}></img>
+              <ImageComponent src={"https://" + post[3][i]} alt="" height="100%" width="100%"></ImageComponent>
               <br/>
-              {/* <div>{post[4][i]}</div> */}
+              <div>{post[4][i]}</div>
             </div>
 
           )}
         <div className="card-body">
           
             <strong>Issued by: </strong>{post[5][i]}
+            <br/>
+            <strong>Issue Date: </strong>{post[9][i]}
+            
         </div>
         {/* <div className="card-footer">
         </div> */}

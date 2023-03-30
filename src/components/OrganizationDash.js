@@ -24,6 +24,7 @@ function OrganizationDash(props) {
   const [companyContract, setCompanyContract] = useState("");
 
   const [upost, setUPost] = useState({});
+  const [certIssueDate,setCertIssueDate]=useState();
   const { isCompany, isInstitute } = props;
   const navigate = useNavigate();
   useEffect(() => {
@@ -61,7 +62,8 @@ function OrganizationDash(props) {
     console.log(cid);
     cid = cid + ".ipfs.w3s.link/image.png";
     console.log(cid);
-    await addCert(username, cid);
+    console.log(certIssueDate);
+    await addCert(username, cid,certIssueDate);
   }
   const handleContracts = async () => {
     const web3 = window.web3;
@@ -97,7 +99,7 @@ function OrganizationDash(props) {
   }
 
 
-  async function addCert(a, b) {
+  async function addCert(a, b, d) {
     // a=parseInt(a)
     // a=a-1
     console.log(a, b)
@@ -109,7 +111,7 @@ function OrganizationDash(props) {
     else {
       c = localStorage.getItem("InstituteName");
     }
-    await userContract.methods.addCertificate(a, b, c).send({ from: account }).on('transactionHash', (hash) => {
+    await userContract.methods.addCertificate(a, b, c, d).send({ from: account }).on('transactionHash', (hash) => {
       console.log(hash)
     })
   }
@@ -326,8 +328,8 @@ if (links.length) {
                 </div>
                 <div className="form-group m-3">
                   
-                    <label for="date">Enter Date :</label>
-                    <input type="date" id="date"></input>
+                    <label for="date" className="input-label m-1">Enter Date :</label>
+                    <input  className="form-control m-1" type="date" id="date"></input>
                 </div>
                 <div className="form-group d-flex justify-content-center m-3">
                   <button type="submit" className="btn btn-primary mb-2">Add experience</button>
@@ -347,6 +349,11 @@ if (links.length) {
                 <label for="post" className="input-label m-1"></label>
                 <input className="form-control m-1" type="file" name="image" accept=".png, .jpg, .jpeg" onChange={e => captureFile(e)} />
               </div>
+              <div className="form-group m-3">
+                  
+                    <label for="date" className="input-label m-1">Enter Issue Date </label>
+                    <input onChange={(e)=>setCertIssueDate(e.target.value)} className="form-control m-1"  type="date" id="date"></input>
+                </div>
               <div className="form-group d-flex justify-content-center m-3">
                 <button type="submit" className="btn btn-primary">Add Post</button>
               </div>

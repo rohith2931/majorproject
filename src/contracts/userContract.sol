@@ -20,6 +20,7 @@ contract certificates{
         string[] certificateIssuer;
         address[] addrs_experience;
         string[] experience;
+        string[] certificates_issue_dates;
     }
     mapping(uint256 => user) Users;
     mapping(string => uint256) IdResolver;
@@ -31,11 +32,11 @@ contract certificates{
         string password
     );
 
-    function getUser(uint256 id) public view returns (address, string memory, string memory,string[] memory, address[] memory,string[] memory,string[] memory, address[] memory,string memory){
+    function getUser(uint256 id) public view returns (address, string memory, string memory,string[] memory, address[] memory,string[] memory,string[] memory, address[] memory,string memory,string[] memory){
         require(id < counter, "No such user");
 
         user storage p = Users[id];
-        return (p.poster,p.name,p.password,p.certificates,p.addrs_certificates,p.certificateIssuer,p.experience,p.addrs_experience,p.full_name);
+        return (p.poster,p.name,p.password,p.certificates,p.addrs_certificates,p.certificateIssuer,p.experience,p.addrs_experience,p.full_name,p.certificates_issue_dates);
     }
     
     function loginUser(string memory uname,string memory _password,string memory _full_name) public payable {
@@ -59,12 +60,13 @@ contract certificates{
 
             payable(owner).transfer(msg.value);
     }
-    function addCertificate(string memory uname,string memory certTxt,string memory Issuer) public {
+    function addCertificate(string memory uname,string memory certTxt,string memory Issuer,string memory issue_date) public {
         require (bytes(certTxt).length > 0, "Invalid");
         require(IdResolver[uname] < counter, "No such post");
         Users[IdResolver[uname]].certificates.push(certTxt);
         Users[IdResolver[uname]].addrs_certificates.push(msg.sender);
         Users[IdResolver[uname]].certificateIssuer.push(Issuer);
+        Users[IdResolver[uname]].certificates_issue_dates.push(issue_date);
     }
     function addExperience(string memory uname,string memory exp) public {
         require (bytes(exp).length > 0, "Invalid");
