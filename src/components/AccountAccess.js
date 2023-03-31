@@ -47,7 +47,7 @@ function AccountAccess() {
               {" "}
               For <em>Users</em>{" "}
             </h2>
-            <p> Get into the space  network reliability, by securing your Certificate and employee hiistory </p>
+            <p> Get into the space of  network reliability, by securing your Certificate and employee history </p>
             <button className="account-access-user-login"   onClick={() => navigate("/userLogin")}>login </button>
           </div>
         </div>

@@ -231,24 +231,43 @@ function Login(props) {
       window.alert("Decentragram contract not deployed to detected network.");
     }
   }
+
+  const boxShadow ={
+    boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px"
+  }
+  const bodyCss={
+
+      backgroundImage:" url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat-back.svg')",
+      backgroundPosition:"center",
+      backgroundRepeat: "repeat",
+      backgroundsize: "7%",
+      overflowX: "hidden",
+      transition: "all 200ms linear",
+      height: ""
+    
+  }
+
   return (
     <>
       {/* <div>Login</div> */}
-      {/* <div className="d-flex justify-content-center m-3">
+      <div className="d-flex justify-content-center m-3">
         <button onClick={handleContracts} className="btn btn-primary ">
           load contract
         </button>
-      </div> */}
+      </div>
 
       <form
         onSubmit={(e) => {
           handleLogin(e);
         }}
       >
-        <div    className="d-flex justify justify-content-center row "    style={{ height: "" }}  >
+        <div    className="d-flex justify justify-content-center row "    style={{ height: ""}}  >
           <div className="col-1"></div>
-          <div className="col-10 align-self-center border border-primary row">
-            <div className="col-5 align-self-center">
+          <div className="col-10 align-self-center  row" style={boxShadow } >
+            <div className="col-5 align-self-center border-end">
+              {isUser && <h1>User Login</h1>}
+              {isInstitute && <h1>Institute Login</h1>}
+              {isCompany && <h1>Company Login</h1>}
               <label className="form-label">Your Wallet Id is:</label>
               <input type="text" className="form-control mb-3" readOnly value={account}></input>
 
