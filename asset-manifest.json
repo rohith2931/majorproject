@@ -1,13 +1,21 @@
 {
   "files": {
-    "main.css": "/majorproject/static/css/main.ababef68.css",
-    "main.js": "/majorproject/static/js/main.f2bcab49.js",
+    "main.css": "/majorproject/static/css/main.9d816d67.css",
+    "main.js": "/majorproject/static/js/main.46ef388c.js",
+    "static/media/signup.svg": "/majorproject/static/media/signup.5b3288c423ad1cbb36332519bab07c88.svg",
+    "static/media/login.svg": "/majorproject/static/media/login.c3351e9b562a7a44be50fc72055d0cae.svg",
+    "static/media/Home2.svg": "/majorproject/static/media/Home2.746cf4ad90c83f0dcd4cf7433931dc13.svg",
+    "static/media/Home1.svg": "/majorproject/static/media/Home1.99219049ca52381e0139955b3ff0a795.svg",
+    "static/media/Logo.svg": "/majorproject/static/media/Logo.123410d5bd1b82e18898986783c1bd29.svg",
+    "static/media/institute.svg": "/majorproject/static/media/institute.20f448ec8951ab89942dfdf57559f931.svg",
+    "static/media/company.svg": "/majorproject/static/media/company.1216ec9ad68c2381af255833ebc045bc.svg",
+    "static/media/user.svg": "/majorproject/static/media/user.dfe2de61fcbaa253624373b5e6c230f2.svg",
     "index.html": "/majorproject/index.html",
-    "main.ababef68.css.map": "/majorproject/static/css/main.ababef68.css.map",
-    "main.f2bcab49.js.map": "/majorproject/static/js/main.f2bcab49.js.map"
+    "main.9d816d67.css.map": "/majorproject/static/css/main.9d816d67.css.map",
+    "main.46ef388c.js.map": "/majorproject/static/js/main.46ef388c.js.map"
   },
   "entrypoints": [
-    "static/css/main.ababef68.css",
-    "static/js/main.f2bcab49.js"
+    "static/css/main.9d816d67.css",
+    "static/js/main.46ef388c.js"
   ]
 }
