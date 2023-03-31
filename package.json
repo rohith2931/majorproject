@@ -49,5 +49,14 @@
   "devDependencies": {
     "gh-pages": "^5.0.0"
   },
-  "main": "index.js"
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rohith2931/majorproject.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://rohith2931.github.io/majorproject/issues"
+  }
 }
