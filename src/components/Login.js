@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import bcrypt from "bcryptjs";
 import React, { useRef } from "react";
+import login from "../assets/login.svg";
 
 function Login(props) {
   const [account, setAccount] = useState("");
@@ -96,6 +97,7 @@ function Login(props) {
         // localStorage.setItem("isUserLogin",true);
         // localStorage.setItem("userData", name);
         localStorage.setItem("Login", "user");
+        console.log(post);
         navigate("/userDash", { state: { post: post } });
       }
     }
@@ -151,6 +153,18 @@ function Login(props) {
     e.preventDefault();
     await checkCompany(username, userid);
   };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    if (isUser) {
+      handleUser(e);
+    } else if (isCompany) {
+      handleCompany(e);
+    } else {
+      handleInstitute(e);
+    }
+  };
+
   async function loadWeb3() {
     if (window.ethereum) {
       window.web3 = new Web3(window.ethereum);
@@ -219,210 +233,73 @@ function Login(props) {
   }
   return (
     <>
-      <div>Login</div>
-      <div className="d-flex justify-content-center m-3">
+      {/* <div>Login</div> */}
+      {/* <div className="d-flex justify-content-center m-3">
         <button onClick={handleContracts} className="btn btn-primary ">
           load contract
         </button>
-      </div>
+      </div> */}
 
-      {isUser && (
-        <form
-          onSubmit={(e) => {
-            handleUser(e);
-          }}
-        >
-          <div className="row">
-            <div className="col-sm-3"></div>
-            <div
-              className="col-sm-6 bg-light mt-4 p-4 "
-              style={{
-                marginLeft: "20px",
-                marginRight: "20px",
-                border: "2px solid black",
-                borderRadius: "10px",
-                boxShadow: "2px 2px 4px black",
-              }}
-              id="registration"
-            >
-              <div className="form-group m-3">
-                {/* <div className="d-flex justify-content-center m-3">
-                    <button onClick={handleContracts} className="btn btn-primary ">load contract</button>
-                  </div> */}
-                <label className="input-label m-1">Your Wallet Id is:</label>
-                <input
-                  type="text"
-                  className="form-control m-1"
-                  readOnly
-                  value={account}
-                ></input>
-              </div>
-              <div className="form-group m-3">
-                <label for="username" className="input-label m-1">
-                  Username
-                </label>
-                <input
-                  type="text"
-                  name="username"
-                  id="name"
-                  className="form-control m-1"
-                  placeholder="Username"
-                  onChange={handleUsername}
-                />
-              </div>
-              <div className="form-group m-3">
-                <label for="userid" className="input-label m-1">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  name="userid"
-                  id="id"
-                  className="form-control m-1"
-                  placeholder="Password"
-                  onChange={handleUserId}
-                />
-              </div>
+      <form
+        onSubmit={(e) => {
+          handleLogin(e);
+        }}
+      >
+        <div    className="d-flex justify justify-content-center row "    style={{ height: "" }}  >
+          <div className="col-1"></div>
+          <div className="col-10 align-self-center border border-primary row">
+            <div className="col-5 align-self-center">
+              <label className="form-label">Your Wallet Id is:</label>
+              <input type="text" className="form-control mb-3" readOnly value={account}></input>
+
+              <label for="username" className="form-label">
+                Username
+              </label>
+              <input    type="text"    name="username"    id="name"    className="form-control mb-3"    placeholder="Username"    onChange={handleUsername}  />
+
+              <label for="userid" className="form-label">
+                Password
+              </label>
+              <input    type="password"    name="userid"    id="id"    className="form-control mb-3"    placeholder="Password"     onChange={handleUserId}/>
+
               <div className="form-group d-flex justify-content-center m-3">
                 <button type="submit" className="btn btn-primary">
                   Log in
                 </button>
               </div>
             </div>
-            <div className="col-sm-3"></div>
-          </div>
-        </form>
-      )}
-
-      {isCompany && (
-        <form onSubmit={(e) => handleCompany(e)}>
-          <div className="row">
-            <div className="col-sm-3"></div>
-            <div
-              className="col-sm-6 bg-light mt-4 p-4 "
-              style={{
-                marginLeft: "20px",
-                marginRight: "20px",
-                border: "2px solid black",
-                borderRadius: "10px",
-                boxShadow: "2px 2px 4px black",
-              }}
-              id="registration"
-            >
-              <div className="form-group m-3">
-                {/* <div className="d-flex justify-content-center m-3">
-                    <button onClick={handleContracts} className="btn btn-primary ">load contract</button>
-                  </div> */}
-                <label className="input-label m-1">Your Wallet Id is:</label>
-                <input
-                  type="text"
-                  className="form-control m-1"
-                  readOnly
-                  value={account}
-                ></input>
-              </div>
-              <div className="form-group m-3">
-                <label for="username" className="input-label m-1">
-                  Username
-                </label>
-                <input
-                  type="text"
-                  name="username"
-                  id="name"
-                  className="form-control m-1"
-                  placeholder="Username"
-                  onChange={handleUsername}
-                />
-              </div>
-              <div className="form-group m-3">
-                <label for="userid" className="input-label m-1">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  name="userid"
-                  id="id"
-                  className="form-control m-1"
-                  placeholder="Password"
-                  onChange={handleUserId}
-                />
-              </div>
-              <div className="form-group d-flex justify-content-center m-3">
-                <button type="submit" className="btn btn-primary">
-                  Log in
-                </button>
-              </div>
+            <div className="col-7 d-flex justify-content-end">
+              <img src={login} style={{width:"100%"}} />
             </div>
-            <div className="col-sm-3"></div>
           </div>
-        </form>
-      )}
-
-      {isInstitute && (
-        <form onSubmit={(e) => handleInstitute(e)}>
-          <div className="row">
-            <div className="col-sm-3"></div>
-            <div
-              className="col-sm-6 bg-light mt-4 p-4 "
-              style={{
-                marginLeft: "20px",
-                marginRight: "20px",
-                border: "2px solid black",
-                borderRadius: "10px",
-                boxShadow: "2px 2px 4px black",
-              }}
-              id="registration"
-            >
-              <div className="form-group m-3">
-                {/* <div className="d-flex justify-content-center m-3">
-                    <button onClick={handleContracts} className="btn btn-primary ">load contract</button>
-                  </div> */}
-                <label className="input-label m-1">Your Wallet Id is:</label>
-                <input
-                  type="text"
-                  className="form-control m-1"
-                  readOnly
-                  value={account}
-                ></input>
-              </div>
-              <div className="form-group m-3">
-                <label for="username" className="input-label m-1">
-                  Username
-                </label>
-                <input
-                  type="text"
-                  name="username"
-                  id="name"
-                  className="form-control m-1"
-                  placeholder="Username"
-                  onChange={handleUsername}
-                />
-              </div>
-              <div className="form-group m-3">
-                <label for="userid" className="input-label m-1">
-                  Password
-                </label>
-                <input
-                  type="password"
-                  name="userid"
-                  id="id"
-                  className="form-control m-1"
-                  placeholder="Password"
-                  onChange={handleUserId}
-                />
-              </div>
-              <div className="form-group d-flex justify-content-center m-3">
-                <button type="submit" className="btn btn-primary">
-                  Log in
-                </button>
-              </div>
-            </div>
-            <div className="col-sm-3"></div>
-          </div>
-        </form>
-      )}
+          <div className="col-1"></div>
+        </div>
+      </form>
     </>
   );
 }
 
 export default Login;
+{
+  /* <div className="col-4">
+
+<label className="">Your Wallet Id is:</label>
+<input   type="text" className=""  readOnly  value={account} ></input>
+
+<label for="username" className="">
+  Username
+</label>
+<input  type="text"  name="username"  id="name"    className=""    placeholder="Username"    onChange={handleUsername} />
+
+<label for="userid" className="">
+  Password
+</label>
+<input    type="password"    name="userid"    id="id"    className=""    placeholder="Password"    onChange={handleUserId}/>
+
+<div className="form-group d-flex justify-content-center m-3">
+<button type="submit" className="btn btn-primary">
+  Log in
+</button>
+</div>
+</div> */
+}

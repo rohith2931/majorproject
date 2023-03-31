@@ -7,7 +7,7 @@
     padding: 0px;
     margin: 0px; 
 }
-.col-4:nth-child(odd){
+.account-access .col-4:nth-child(odd){
     background-color: rgb(245, 249, 254);
 }
 .account-ioc img{
