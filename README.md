@@ -4,8 +4,8 @@ This project provides a user interface for Candidates(job applicants), Instituti
 
 ## Prerequisites
 
-Node.js and npm (Node Package Manager) installed on your machine. You can download them from the official website: https://nodejs.org/en/.
-Download the metamask browser extension from https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en
+* Node.js and npm (Node Package Manager) installed on your machine. You can download them from the official website: https://nodejs.org/en/.
+* Download the metamask browser extension from https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn?hl=en
 
 ### Getting Started
 
